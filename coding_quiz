@@ -1,0 +1,42 @@
+Problem 1
+Write a program to print the numbers from 1 to 100, one number for each line. Instead of multiples of 3, the program prints "Flash". Instead of multiples of 5, the program prints "Bang". Instead of multiples of 3 and 5, it prints "FlashBang".
+
+Example output for numbers 1 through 16:
+1
+2
+Flash
+4
+Bang
+Flash
+7
+8
+Flash
+Bang
+11
+Flash
+13
+14
+FlashBang
+16
+
+
+Problem 2
+
+Write a function that takes an array of strings, and returns a single string containing an english sentence listing the words, using correct comma rules for writing lists.
+
+Example:
+input: ["one", "two"]
+output: "one and two"
+
+input: ["one", "two", "three"]
+output: "one, two, and three"
+
+
+Problem 3
+
+If you start listing out the numbers of the fibonacci sequence, you have to list out thirteen of them before you find one with three decimal digits:
+0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144
+
+How many fibonacci numbers would you have to list to find one with at least 19 digits? Write a program to solve this problem.
+
+Bonus: How many would you have to list to find one with at least 10,000 digits?
