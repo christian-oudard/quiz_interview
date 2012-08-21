@@ -19,6 +19,8 @@
 #     (4, 9, 1),
 # ]
 
+from binarysearchtree import BinarySearchTree
+
 def skyline(buildings):
     # Transform the list of buildings into a list of events describing level
     # changes. There is an 'up' event for the left side of the building, and a
@@ -34,21 +36,21 @@ def skyline(buildings):
 
     # Scan from left to right across the buildings, keeping track of how many
     # buildings there are, and their heights, at the current x-value.
-    # The maximum value of the stack at each point is the height of the skyline.
+    # The maximum value of the heights at each point is the height of the skyline.
     # We yield out points for the solution as we determine the skyline height
     # at each point.
-    stack = []
+    heights = BinarySearchTree()
     last_skyline_height = 0
     for x, y, up_down in events:
         if up_down:
-            stack.append(y)
+            heights.insert(y)
         else:
-            stack.remove(y)
+            heights.pop(y)
 
-        if not stack:
+        if not heights:
             skyline_height = 0
         else:
-            skyline_height = max(stack)
+            skyline_height = heights.maximum()
 
         # Only output points when the level changes.
         if skyline_height != last_skyline_height:
