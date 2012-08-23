@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 
+import sys
 import time
 import itertools
 
@@ -31,7 +32,7 @@ def convolve_minmax(matrix):
     """
     Takes in a 2-D matrix, as a nested list. Computes the convolution of
     the matrix with the kernel [-1, 0, 1] vertically and horizontally. Returns
-    4 values, (dx_min, dx_max, dy_min, dy_max) for the most extreme differences
+    4 values, (dx_max, dx_min, dy_max, dy_min) for the most extreme differences
     found by the convolution.
 
     >>> convolve_minmax([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
@@ -39,31 +40,38 @@ def convolve_minmax(matrix):
     >>> convolve_minmax([[1, -2, 3], [-4, 5, -6], [7, -8, 9]])
     (2, -2, 6, -6)
     """
+    # We don't actually store the dx and dy matrices, because we only need the
+    # min and max. In fact, we only use a constant amount more memory than the
+    # size of the original matrix.
+
     height = len(matrix)
     width = len(matrix[0])
 
     # X direction.
-    dx = {}
+    dx_max = sys.float_info.min
+    dx_min = sys.float_info.max
     for y in range(height):
         row = iter_row(y, matrix)
-        groups = tuplewise(3, row)
-        for x, (a, b, c) in enumerate(groups):
-            dx[(x, y)] = -a + c
+        for a, b, c in tuplewise(3, row):
+            n = -a + c
+            if n > dx_max:
+                dx_max = n
+            if n < dx_min:
+                dx_min = n
 
     # Y direction.
-    dy = {}
+    dy_max = sys.float_info.min
+    dy_min = sys.float_info.max
     for x in range(width):
         column = iter_column(x, matrix)
-        groups = tuplewise(3, column)
-        for y, (a, b, c) in enumerate(groups):
-            dy[(x, y)] = -a + c
+        for a, b, c in tuplewise(3, column):
+            n = -a + c
+            if n > dy_max:
+                dy_max = n
+            if n < dy_min:
+                dy_min = n
 
-    return (
-        max(dx.values()),
-        min(dx.values()),
-        max(dy.values()),
-        min(dy.values()),
-    )
+    return (dx_max, dx_min, dy_max, dy_min)
 
 def timer(func):
     start = time.time()
@@ -72,7 +80,6 @@ def timer(func):
     return result, (finish - start)
 
 if __name__ == '__main__':
-    import sys
     import random
     from textwrap import dedent
 
