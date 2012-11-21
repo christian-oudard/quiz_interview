@@ -7,4 +7,4 @@ Solution:
 
 have a low list and a high list. each of these lists are maintaned in sorted order, with O(log(n)) insort. Each time you add a number, compare it to the current median, and add it to the low list or high list accordingly. Compare the lengths of the lists, and if one is larger than the other, shift the median up or down as necessary.
 
-Equivalently, just maintain a sorted list?
+Equivalently, just maintain a sorted list? slower, requires O(n*log(n))

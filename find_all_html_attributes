@@ -1,26 +1,18 @@
-You are given a very large xml file, and you want to know how many different types of "list" attributes there are in the file.
+You are given a very large html file, and you want to know how many different domains are linked to by the hyperlinks in that file.
 
-"A" solution:
+= the high-precision way
+Use an html parser to parse the file, and get the value of all the <a href="..."> attributes. For each url obtained this way, use a url parser to extract the domain.
 
-Use grep and sort from memory. Time: 3 seconds.
+drawbacks:
+- what if the html is malformed? liberal html parser?
+- requires writing code
 
-$ grep -o "list='[^']*'" infile.xml | sort -u
-list='alphalower'
-list='alphaupper'
-list='bullet'
-list='circle'
-list='number'
-list='romanlower'
-list='romanupper'
-list='square'
+= the shell way
+write a regex like this:
+$ grep -o "<a[^>]*href="([^"]*)" infile.html | sort -u
 
-"B" solution:
-
-"Hmm, I bet there's a really neat regular expression to do that, let me check the docs."
-
-Time: 10 minutes.
-
-
-"F" solution:
-
-"I'll write a program in java really quick to do that!" Time: 4 hours.
+drawbacks:
+- edge cases in valid html
+    - single vs double quotes
+    - weird whitespace with newlines
+    - http vs https
