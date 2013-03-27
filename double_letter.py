@@ -1,28 +1,35 @@
 """
-Write a function to remove repeated letters from a string, ignoring whitespace
+Write a function to remove doubled letters from a string, ignoring whitespace
 and letter case.
 
->>> remove_repeated('abc')
+>>> remove_doubled('abc')
 'abc'
->>> remove_repeated('abbc')
+>>> remove_doubled('aba')
+'aba'
+>>> remove_doubled('abbc')
 'abc'
->>> remove_repeated('aAbc')
+>>> remove_doubled('aAbc')
 'abc'
->>> remove_repeated('ABbc')
-'ABc'
->>> remove_repeated('ab cd')
+>>> remove_doubled('aBbc')
+'aBc'
+>>> remove_doubled('abBc')
+'abc'
+>>> remove_doubled('ab cd')
 'ab cd'
->>> remove_repeated('ab  cd')
+>>> remove_doubled('ab  cd')
 'ab  cd'
->>> remove_repeated('abc cd')
+>>> remove_doubled('ab  ccd')
+'ab  cd'
+>>> remove_doubled('abc cdd')
 'abc cd'
+>>> remove_doubled('abbcb')
+'abcb'
 """
-def remove_repeated(s):
+def remove_doubled(input_string):
     filtered = []
-    for c in s:
-        filtered.append(c)
-        if len(filtered) >= 2:
-            last = filtered[-2]
-            if not last.isspace() and last.lower() == c.lower():
-                filtered.pop()
+    last = None
+    for c in input_string:
+        if c.lower() != last or not c.isalpha():
+            filtered.append(c)
+        last = c.lower()
     return ''.join(filtered)
