@@ -24,6 +24,8 @@ and letter case.
 'abc cd'
 >>> remove_doubled('abbcb')
 'abcb'
+>>> remove_doubled('abbbc')
+''
 """
 def remove_doubled(input_string):
     filtered = []
