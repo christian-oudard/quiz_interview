@@ -11,6 +11,8 @@ decimal numbers showing how many repeats there are.
 'ab3c'
 >>> encode('aaaaaaaaaaaa')
 'a12'
+>>> encode('a'*1000000)
+'a1000000'
 
 >>> decode('')
 ''
@@ -20,44 +22,47 @@ decimal numbers showing how many repeats there are.
 'abbbc'
 >>> decode('a12')
 'aaaaaaaaaaaa'
+>>> decode('a1000000') == 'a' * 1000000
+True
 """
 
 
 def encode(text):
-    groups = []
+    # Turn the text into a list of groups and group lengths.
+    group_letters = []
+    group_counts = []
     for c in text:
-        if groups and c == groups[-1][-1]:
-            groups[-1].append(c)
+        if group_letters and c == group_letters[-1]:
+            group_counts[-1] += 1
         else:
-            groups.append([c])
+            group_letters.append(c)
+            group_counts.append(1)
+
+    # Translate the list of groups into a run length encoding.
     result = []
-    for g in groups:
-        c = g[0]
-        if len(g) > 1:
-            result.append(c + str(len(g)))
-        else:
-            result.append(c)
+    for letter, count in zip(group_letters, group_counts):
+        result.append(letter)
+        if count > 1:
+            result.append(str(count))
+
     return ''.join(result)
 
 
 def decode(text):
-    numeric_characters = '0123456789'
+    numeric_characters = set('0123456789')
     result = []
-    length = len(text)
     i = 0
-    while i < length:
+    while i < len(text):
+        # Get one character and all the digits following it.
         c = text[i]
-        numbers = []
-        while i < length - 1:
-            n = text[i + 1]
-            if n not in numeric_characters:
-                break
-            numbers.append(n)
+        digits = []
+        while i < len(text) - 1 and text[i + 1] in numeric_characters:
             i += 1
-        if numbers:
-            run_length = int(''.join(numbers))
-        else:
-            run_length = 1
-        result.append(c * run_length)
+            digits.append(text[i])
+        # Output the correct number of characters.
+        count = 1
+        if digits:
+            count = int(''.join(digits))
+        result.append(c * count)
         i += 1
     return ''.join(result)
