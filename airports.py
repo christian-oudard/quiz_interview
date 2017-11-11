@@ -1,7 +1,9 @@
 from collections import defaultdict
 from datetime import datetime
 
-data = json.load(url.get([
+import json
+
+data = json.load([
     {
         "location": "NRT", 
         "temperature": 36, 
@@ -12,7 +14,7 @@ data = json.load(url.get([
         "temperature": 52, 
         "timestamp": "2012-06-14 13:15:00"
     },
-]
+])
 
 #
 buckets = defaultdict(lambda: defaultdict(list))
@@ -46,5 +48,3 @@ for location in buckets.keys():
         print(timestamp_key)
         print(average(location_data[timestamp_key]))
 
-
-import 

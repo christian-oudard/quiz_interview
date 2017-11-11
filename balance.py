@@ -33,6 +33,14 @@ Long sequence of ones, even length.
 >>> list(balance_points([1]*100001))
 []
 """
+
+
+def balance_points_naive(sequence):
+    for i in range(len(sequence) + 1):
+        if sum(sequence[:i]) == sum(sequence[i:]):
+            yield i
+
+
 def balance_points(sequence):
     """
     Find the balance points for a list of numbers.
