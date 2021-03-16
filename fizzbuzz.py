@@ -32,3 +32,13 @@ def fizzbuzz(limit):
             print('Buzz')
         else:
             print(i)
+
+
+def fizzbuzz_totient(limit):
+    for i in range(1, limit + 1):
+        print({
+            0: 'FizzBuzz',
+            6: 'Fizz',
+            10: 'Buzz',
+            1: i,
+        }[pow(i, 4, 15)])
