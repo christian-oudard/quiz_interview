@@ -5,23 +5,26 @@ decimal numbers showing how many repeats there are.
 
 >>> encode('')
 ''
+>>> decode('')
+''
+>>> encode('a')
+'a'
+>>> decode('a')
+'a'
 >>> encode('abc')
+'abc'
+>>> decode('abc')
 'abc'
 >>> encode('abbbc')
 'ab3c'
->>> encode('aaaaaaaaaaaa')
-'a12'
->>> encode('a'*1000000)
-'a1000000'
-
->>> decode('')
-''
->>> decode('a')
-'a'
 >>> decode('ab3c')
 'abbbc'
+>>> encode('aaaaaaaaaaaa')
+'a12'
 >>> decode('a12')
 'aaaaaaaaaaaa'
+>>> encode('a'*1000000)
+'a1000000'
 >>> decode('a1000000') == 'a' * 1000000
 True
 """

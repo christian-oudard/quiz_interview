@@ -19,6 +19,7 @@ True
 >>> all(a + b == 100000 for a, b in pairs)
 True
 """
+
 def integer_pairs(integers, target):
     complements = {}
     for i in integers:

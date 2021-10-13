@@ -27,9 +27,6 @@ def next_permutation(n):
         right_digits = [a, b]
         higher_digits = [d for d in right_digits if d > left]
 
-        
-
-
     return from_digits(digits)
 
 

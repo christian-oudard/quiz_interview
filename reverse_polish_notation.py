@@ -1,5 +1,5 @@
 """
-Simple reverse polish notation command line calculator.
+Create a simple reverse polish notation command line calculator.
 
 >>> calc('2 2 +')
 4
@@ -9,6 +9,8 @@ Simple reverse polish notation command line calculator.
 8
 >>> calc('2 10 -')
 -8
+>>> calc('3 7 *')
+21
 """
 
 
@@ -24,6 +26,10 @@ def calc(expression):
             b = stack.pop()
             a = stack.pop()
             stack.append(a - b)
+        elif t == '*':
+            b = stack.pop()
+            a = stack.pop()
+            stack.append(a * b)
         else:
             stack.append(t)
     return stack[-1]

@@ -1,5 +1,5 @@
 """
-Write a function to remove doubled letters from a string, ignoring whitespace
+Write a function to remove repeated letters from a string, ignoring whitespace
 and letter case.
 
 >>> remove_doubled('abc')
@@ -25,7 +25,7 @@ and letter case.
 >>> remove_doubled('abbcb')
 'abcb'
 >>> remove_doubled('abbbc')
-''
+'abc'
 """
 def remove_doubled(input_string):
     filtered = []

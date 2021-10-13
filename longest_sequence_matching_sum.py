@@ -1,5 +1,5 @@
 """
-    Given an array A and integer k, find the length of the longest sub-array (consecutive) whose sum is k.
+Given an array A and integer k, find the length of the longest sub-array (consecutive) whose sum is k.
 
 Example: given A = [100,1,2,3,-1,0,0,5,6,7], k = 5, return 6 (which is the length of [1,2,3,-1,0,0])
 

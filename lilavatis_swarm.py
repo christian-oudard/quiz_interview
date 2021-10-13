@@ -1,4 +1,6 @@
 """
+Bhaskara wrote this algebra problem as a poem in the twelfth century:
+
 A fifth part of a swarm of bees came to rest
 on the flower of Kadamba,
 a third on the flower of Silinda.
@@ -7,6 +9,8 @@ flew over a flower of Krutaja,
 and one bee alone remained in the air,
 attracted by the perfume of a jasmine in bloom.
 Tell me, beautiful girl, how many bees were in the swarm?
+
+The algebraic solution in modern notation is this:
 
 n = n/5 + n/3 + 3*(n/3 - n/5) + 1
 -n + n/5 + n/3 + n - (3/5)*n + 1 = 0

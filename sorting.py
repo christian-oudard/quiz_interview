@@ -1,4 +1,7 @@
 """
+Write an implementation of several common sorting algorithms, such as insertion sort, quicksort, and merge
+sort.
+
 >>> import random
 >>> random.seed(1)
 >>> l = [ random.randrange(10) for _ in range(5) ]

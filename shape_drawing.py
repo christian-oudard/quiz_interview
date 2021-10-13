@@ -1,20 +1,6 @@
-# Uglifications:
-# architecture
-# - global grid
-# - no unittests
-# - pass unnecessary arguments around everywhere
-# - remove class abstractions
-# - one huge draw method with lots of switches, interviewee should split it out.
-# construction
-# - use type(obj).__name__ == 'str', generally conflating types
-# - default=[]
-# - stringly typed code
-# - terrible names
-# - bad whitespace
-# - no error checking
-# - screwy logic
-
 """
+Write a class to do ascii drawings of rectangles and circles.
+
 >>> c = Canvas(6, 5)
 >>> c.rectangle(1, 1, 4, 3)
 >>> print(c.format())
@@ -60,7 +46,7 @@ class Canvas(object):
         self.width = width
         self.height = height
         self.data = {}
-        # Set everything off at first.
+        # Set everything to "off" at first.
         for x in range(self.width):
             for y in range(self.height):
                 self.data[(x, y)] = OFF
