@@ -1,7 +1,14 @@
 """
 Print numbers in a square spiral, starting from 1.
 
-Example for size 3:
+>>> print(spiral_numbers(4))
+1 2
+4 3
+
+>>> print(spiral_numbers(9))
+7 8 9
+6 1 2
+5 4 3
 
 >>> print(spiral_numbers(25))
 21 22 23 24 25
@@ -9,6 +16,14 @@ Example for size 3:
 19  6  1  2 11
 18  5  4  3 12
 17 16 15 14 13
+
+>>> print(spiral_numbers(40))
+   21 22 23 24 25 26
+   20  7  8  9 10 27
+40 19  6  1  2 11 28
+39 18  5  4  3 12 29
+38 17 16 15 14 13 30
+37 36 35 34 33 32 31
 """
 
 from typing import Tuple, Dict
@@ -50,11 +65,13 @@ def one_forward(p: Pos, d: Dir):
 
 
 def spiral_numbers_grid(limit: int) -> Dict[Pos, int]:
+    # Start with the number 1 already added.
     grid = {(0, 0): 1}
     pos = (0, 0)
     num = 1
     direction = Dir.UP
 
+    # Always try to turn right, but if that fails, go straight.
     while num < limit:
         num += 1
 
@@ -77,7 +94,11 @@ def spiral_numbers_grid(limit: int) -> Dict[Pos, int]:
 
 
 def spiral_numbers(limit: int) -> str:
+    # Generate a grid of numbers in a spiral.
     grid = spiral_numbers_grid(limit)
+
+    # Iterate rows of the grid, printing each number. Print spaces if a number is missing.
+    # Add padding to keep numbers aligned horizontally.
     min_x = min( x for (x, y) in grid.keys() )
     max_x = max( x for (x, y) in grid.keys() )
     min_y = min( y for (x, y) in grid.keys() )
