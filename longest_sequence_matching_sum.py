@@ -15,6 +15,10 @@ which has length 6, starting at index 1 and ending at 7.
 5
 
 >>> assert largest_range_matching_sum([1, 2, 3, 4, 5], 1000) is None
+
+>>> largest_range_matching_sum([1]*10**6, 10**6-1000)
+(0, 999000)
+
 """
 
 from collections import defaultdict
