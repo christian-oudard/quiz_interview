@@ -19,9 +19,12 @@ fn gas_station_loop(gas_amounts: &[u32], gas_costs: &[u32]) -> Option<usize> {
     if *tank.last().expect("not empty") < 0 {
         return None  // Not enough gas to complete a loop.
     }
-    // Start the journey just after the lowest point.
-    let (min_index, _) = tank.iter().enumerate().min_by_key(|(_, &gas)| gas).expect("not empty");
-    let starting_station = (min_index + 1) % n;
+    let (min_index, min_value) = tank.iter().enumerate().min_by_key(|(_, &gas)| gas).expect("not empty");
+    let starting_station = if *min_value >= 0 {
+        0  // Any index will work if we can never go negative.
+    } else {
+        (min_index + 1) % n  // Start the journey just after the lowest point.
+    };
     Some(starting_station)
 }
 
@@ -40,6 +43,7 @@ mod tests {
             (vec![1, 1, 1, 1, 1], vec![0, 0, 5, 0, 0], Some(3)),
             (vec![0, 3, 0, 3], vec![3, 0, 3, 0], Some(1)),
             (vec![0, 3, 0, 3], vec![3, 0, 3, 0], Some(1)),
+            (vec![2, 2, 2], vec![1, 1, 1], Some(0)),
         ];
         for (gas_amounts, gas_costs, idx) in test_cases {
             assert_eq!(
